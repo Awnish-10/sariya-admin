@@ -67,6 +67,7 @@ const Textinput = ({
             disabled={disabled}
             id={id}
             // name={inputName ?? ''}
+            
             onChange={onChange}
           />
         )}
