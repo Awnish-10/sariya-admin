@@ -60,7 +60,7 @@ const LoginForm = () => {
       const response = await customAxios.post('admin/login', requestData);
       console.log('API Response:', response.data.token);
       if(response.data.token){
-        dispatch(handleLogin(response.data.token));
+        dispatch(handleLogin({jwt:response.data.token}));
         setTimeout(() => {
           navigate("/dealer");
         }, 1500);

@@ -63,9 +63,9 @@ export const authSlice = createSlice({
     // },
 
     handleLogin: (state, action) => {
-      console.log("action",action);
+      console.log("action",action.payload.jwt);
       state.isAuth = true;
-      state.jwt = action.payload;
+      state.jwt = action.payload.jwt;
       // save isAuth in local storage
       window.localStorage.setItem("isAuth", JSON.stringify(state.isAuth));
       window.localStorage.setItem("jwt", JSON.stringify( state.jwt));

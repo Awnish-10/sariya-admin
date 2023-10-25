@@ -11,10 +11,11 @@ const customAxios = axios.create({
 customAxios.interceptors.request.use(config => {
   // Add your logic to include common data like JWT token
   // For example, if you have a JWT token stored in localStorage:
-  const token = localStorage.getItem('jwtToken');
+  const token = localStorage.getItem('jwt');
+  console.log("token",token);
   config.headers['Content-Type'] = 'application/json'
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.Authorization = `Bearer ${token.slice(1, -1)}`;
   }
   return config;
 });
