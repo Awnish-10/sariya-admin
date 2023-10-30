@@ -28,6 +28,35 @@ export const menuItems = [
     isHide: false,
     // badge: "1.0.0",
   },
+  {
+    title: "Brand",
+    icon: "heroicons-outline:collection",
+    link: "brand",
+    isHide: false,
+    // badge: "1.0.0",
+  },
+  {
+    title: "Featured Brands",
+    icon: "heroicons-outline:collection",
+    link: "featured-brands",
+    isHide: false,
+    // badge: "1.0.0",
+  },
+  {
+    title: "Order",
+    icon: "heroicons-outline:collection",
+    link: "order",
+    isHide: false,
+    // badge: "1.0.0",
+  },
+  {
+    title: "Banner",
+    icon: "heroicons-outline:collection",
+    link: "banner",
+    isHide: false,
+    // badge: "1.0.0",
+  },
+
  
 ];
 

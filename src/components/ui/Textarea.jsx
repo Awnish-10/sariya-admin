@@ -8,6 +8,7 @@ const Textarea = ({
   classGroup = "",
   register,
   name,
+  inputName,
   readonly,
   dvalue,
   error,
@@ -67,6 +68,7 @@ const Textarea = ({
             id={id}
             cols={cols}
             rows={row}
+            name={inputName ?? ''}
             onChange={onChange}
           ></textarea>
         )}

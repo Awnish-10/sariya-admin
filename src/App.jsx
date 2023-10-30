@@ -15,6 +15,10 @@ import Layout from "./layout/Layout";
 import Dealer from "./pages/dashboard/Dealer";
 import Buyer from "./pages/dashboard/Buyer";
 import Product from "./pages/dashboard/Product";
+import Banner from "./pages/dashboard/Banner";
+import Order from "./pages/dashboard/Order";
+import Brand from "./pages/dashboard/Brand";
+import FeaturedBrands from "./pages/dashboard/FeaturedBrands";
 
 function App() {
   return (
@@ -60,6 +64,10 @@ function App() {
           <Route path="dealer" element={<Dealer />} />
           <Route path="buyer" element={<Buyer />} />
           <Route path="product" element={<Product />} />
+          <Route path="brand" element={<Brand />} />
+          <Route path="order" element={<Order />} />
+          <Route path="banner" element={<Banner />} />
+          <Route path="featured-brands" element={<FeaturedBrands />} />
           <Route path="*" element={<Navigate to="/404" />} />
         </Route>
 

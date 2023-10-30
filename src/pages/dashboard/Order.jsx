@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Card from "@/components/ui/Card";
-import Switch from "@/components/ui/Switch";
 import GroupChart3 from "@/components/partials/widget/chart/group-chart-3";
 import SelectMonth from "@/components/partials/SelectMonth";
 import StackBarChart from "@/components/partials/widget/chart/stack-bar";
@@ -9,9 +8,8 @@ import Calculation from "@/components/partials/widget/chart/Calculation";
 import HomeBredCurbs from "./HomeBredCurbs";
 import ExampleTwo from "../../components/table/react-tables/ExampleTwo";
 import customAxios from "../../apis/CustomAxios";
-import axios from "axios";
 
-const Dealer = () => {
+const Order = () => {
   const [data, setData] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(6);
@@ -35,7 +33,7 @@ const Dealer = () => {
   }, [])
   const fetchData = async () => {
     try {
-      const response = await customAxios.get(`users?pageNo=${currentPage-1}&pagerange=${pageRange}&role=2`);
+      const response = await customAxios.get(`orders?pageNo=${currentPage-1}&pagerange=${pageRange}`);
   
       console.log('response.data',response.data); // Handle the response data here
       setData(response.data.results)
@@ -45,94 +43,89 @@ const Dealer = () => {
     }
   };
 
-  const handleUpdate = async(id, status) => {
-    console.log("handleUpdate",handleUpdate);
-    const { data } = await customAxios.patch(`users/${id}`, {
-      status: status == 1 ? 0 : 1
-    })
-    fetchData()
-  }
-
   const COLUMNS = [
     {
       Header: "Id",
       accessor: "id",
       Cell: (row) => {
-        return <span>{row?.cell?.value ? row?.cell?.value : 'N/A'}</span>;
+        return <span>{row?.cell?.value ? row?.cell.value : 'N/A'}</span>;
       },
     },
+    // {
+    //   Header: "Name",
+    //   accessor: "productname.brandname",
+    //   Cell: (row) => {
+    //     return <span>{row?.cell?.value ? row?.cell.value : 'N/A'}</span>;
+    //   },
+    // },
+    // {
+    //   Header: "Product Id",
+    //   accessor: "productId",
+    //   Cell: (row) => {
+    //     return <span>{row?.cell?.value ? row?.cell.value : 'N/A'}</span>;
+    //   },
+    // },
     {
       Header: "Name",
-      accessor: "name",
+      accessor: "username.name",
       Cell: (row) => {
-        return <span>{row?.cell?.value ? row?.cell?.value : 'N/A'}</span>;
-      },
-    },
-
-    {
-      Header: "Name of Firm",
-      accessor: "nameoffirm",
-      Cell: (row) => {
-        return <span>{row?.cell?.value ? row?.cell?.value : 'N/A'}</span>;
-      },
-    },
-    {
-      Header: "Town",
-      accessor: "townname",
-      Cell: (row) => {
-        return <span>{row?.cell?.value ? row?.cell?.value : 'N/A'}</span>;
+        return <span>{row?.cell?.value ? row?.cell.value : 'N/A'}</span>;
       },
     },
     {
       Header: "Email",
-      accessor: "email",
+      accessor: "username.email",
       Cell: (row) => {
-        return <span>{row?.cell?.value ? row?.cell?.value : 'N/A'}</span>;
+        return <span>{row?.cell?.value ? row.cell.value : 'N/A'}</span>;
       },
     },
     {
       Header: "Mobile",
-      accessor: "mobile",
+      accessor: "username.mobile",
       Cell: (row) => {
-        return <span>{row?.cell?.value ? row?.cell?.value : 'N/A'}</span>;
+        return <span>{row?.cell?.value ? row.cell.value : 'N/A'}</span>;
       },
     },
     {
-      Header: "GST IN",
-      accessor: "gstin",
+      Header: "Unit",
+      accessor: "unit",
       Cell: (row) => {
-        return <span>{row?.cell?.value ? row?.cell?.value : 'N/A'}</span>;
+        return <span>{row?.cell?.value ? row.cell.value : 'N/A'}</span>;
       },
     },
-
     {
-      Header: "Status",
-      accessor: "status",
+      Header: "Quantity",
+      accessor: "quantity",
       Cell: (row) => {
-        return <Switch
-        // label="primary"
-        activeClass="bg-primary-500"
-        value={row?.cell?.value == 1? true: false}
-        onChange={()=>{handleUpdate(row.row.original.id, row.cell.value)}} 
-        // onChange={() => setChecked5(!checked5)}
-      />
-        // return <span onClick={()=>{handleUpdate(row.row.original.id, row.cell.value)}} style={{cursor: 'pointer'}}>{row?.cell?.value == 1 ? "Active" : 'Inactive'}</span>;
+        return <span>{row?.cell?.value ? row.cell.value : 'N/A'}</span>;
       },
     },
-
-
+    {
+      Header: "Brand",
+      accessor: "productname.brandname",
+      Cell: (row) => {
+        return <span>{row?.cell?.value ? row.cell.value : 'N/A'}</span>;
+      },
+    },
+    {
+      Header: "Size",
+      accessor: "productname.size",
+      Cell: (row) => {
+        return <span>{row?.cell?.value ? row.cell.value : 'N/A'}</span>;
+      },
+    },
   ];
   
   return (
     <div>
-      {/* <HomeBredCurbs title="Dealer's List" /> */}
+      {/* <HomeBredCurbs title="Buyer's List" /> */}
       <div className="space-y-5">
       
 
-        <ExampleTwo title="Dealer's List" data={data} column={COLUMNS} currentPage={currentPage} totalPages={totalPages} handlePageChange={handlePageChange}/>
+        <ExampleTwo title="Orders" column={COLUMNS} data={data} currentPage={currentPage} totalPages={totalPages} handlePageChange={handlePageChange}/>
       </div>
     </div>
   );
 };
 
-export default Dealer;
+export default Order;

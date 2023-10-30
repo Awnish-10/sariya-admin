@@ -15,7 +15,7 @@ const Fileinput = ({
 }) => {
   return (
     <div>
-      <div className="filegroup">
+      <div className="filegroup mt-5">
         <label>
           <input
             type="file"
