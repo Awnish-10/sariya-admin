@@ -3,7 +3,8 @@ import { toast } from "react-toastify";
 
 // Create an Axios instance with default configuration
 const customAxios = axios.create({
-  baseURL: 'http://localhost:3002/', // Set your API base URL here
+  // baseURL: 'http://localhost:3002/', // Set your API base URL here
+  baseURL: 'http://ec2-15-206-253-20.ap-south-1.compute.amazonaws.com:3002/', 
   timeout: 10000, // Set the timeout for requests in milliseconds
 });
 

@@ -7,6 +7,7 @@ import { ToastContainer } from "react-toastify";
 // image import
 import LogoWhite from "@/assets/images/logo/logo-white.svg";
 import Logo from "@/assets/images/logo/logo.svg";
+import sariya from "@/assets/images/sariya/sariya.jpeg";
 import Illustration from "@/assets/images/auth/ils1.svg";
 
 const register = () => {
@@ -20,7 +21,7 @@ const register = () => {
           <div className="left-column relative z-[1]">
             <div className="max-w-[520px] pt-20 ltr:pl-20 rtl:pr-20">
               <Link to="/">
-                <img src={isDark ? LogoWhite : Logo} alt="" className="mb-10" />
+              <img src={isDark ? sariya : sariya} alt="" className="mb-10" style={{height:100, width:100, borderRadius:50, margin:10}}/>
               </Link>
 
               <h4>
@@ -53,7 +54,7 @@ const register = () => {
                 <div className="text-center 2xl:mb-10 mb-5">
                   <h4 className="font-medium">Sign up</h4>
                   <div className="text-slate-500 dark:text-slate-400 text-base">
-                    Create an account to start using Dashcode
+                    Create an account to start using Sariya Bazaar
                   </div>
                 </div>
                 <RegForm />

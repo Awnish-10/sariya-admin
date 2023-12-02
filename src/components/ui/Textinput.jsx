@@ -75,6 +75,7 @@ const Textinput = ({
             type={type === "password" && open === true ? "text" : type}
             className={`form-control py-2 ${className}`}
             placeholder={placeholder}
+            value={value}
             readOnly={readonly}
             disabled={disabled}
             defaultValue={defaultValue}

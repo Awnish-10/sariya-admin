@@ -6,6 +6,7 @@ import useDarkMode from "@/hooks/useDarkMode";
 // image import
 import LogoWhite from "@/assets/images/logo/logo-white.svg";
 import Logo from "@/assets/images/logo/logo.svg";
+import sariya from "@/assets/images/sariya/sariya.jpeg";
 import Illustration from "@/assets/images/auth/ils1.svg";
 import UserImage from "@/assets/images/all-img/user-big.png";
 const LockScreen = () => {
@@ -16,7 +17,7 @@ const LockScreen = () => {
         <div className="left-column relative z-[1]">
           <div className="max-w-[520px] pt-20 ltr:pl-20 rtl:pr-20">
             <Link to="/">
-              <img src={isDark ? LogoWhite : Logo} alt="" className="mb-10" />
+            <img src={isDark ? sariya : sariya} alt="" className="mb-10" style={{height:100, width:100, borderRadius:50, margin:10}}/>
             </Link>
 
             <h4>
@@ -73,7 +74,7 @@ const LockScreen = () => {
               </div>
             </div>
             <div className="auth-footer text-center">
-              Copyright 2021, Dashcode All Rights Reserved.
+              Copyright 2023, Sariya Bazaar All Rights Reserved.
             </div>
           </div>
         </div>

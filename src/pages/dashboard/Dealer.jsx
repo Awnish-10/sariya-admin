@@ -10,13 +10,22 @@ import HomeBredCurbs from "./HomeBredCurbs";
 import ExampleTwo from "../../components/table/react-tables/ExampleTwo";
 import customAxios from "../../apis/CustomAxios";
 import axios from "axios";
-
+import Icon from "@/components/ui/Icon";
+import Tooltip from "@/components/ui/Tooltip";
+import moment from "moment"
+import Button from "@/components/ui/Button";
+import Modal from "@/components/ui/Modal";
+import Textinput from "@/components/ui/Textinput";
+import Flatpickr from "react-flatpickr";
 const Dealer = () => {
   const [data, setData] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(6);
   const [pageRange, setPageRange] = useState(10)
   const [totalData, setTotalData] = useState(0)
+  const [row, setRow] = useState({})
+  const [showModal, setShowModal] = useState(false)
+  console.log("row",row);
   useEffect(() => {
     setTotalPages(Math.ceil(totalData/pageRange))
   }, [data])
@@ -44,8 +53,20 @@ const Dealer = () => {
       console.error('Error fetching data:', error);
     }
   };
-
-  const handleUpdate = async(id, status) => {
+  const handleInputChange = (value, name) => {
+    // const { name, value } = e.target;
+    setRow((prevData) => ({ ...prevData, [name]: value }));
+  };
+  const handleUpdate = async() => {
+    console.log("handleUpdate",handleUpdate);
+    const { data } = await customAxios.patch(`users/${row.id}`, {
+      membershipDate: row.membershipDate,
+      numberofdays: row.numberofdays
+    })
+    fetchData()
+    setShowModal(false)
+  }
+  const handledayUpdate = async(id, status) => {
     console.log("handleUpdate",handleUpdate);
     const { data } = await customAxios.patch(`users/${id}`, {
       status: status == 1 ? 0 : 1
@@ -106,6 +127,21 @@ const Dealer = () => {
     },
 
     {
+      Header: "Membership Date",
+      accessor: "membershipDate",
+      Cell: (row) => {
+        return <span>{ row?.cell?.value ? moment(row?.cell?.value).format('L') : 'N/A'}</span>;
+      },
+    },
+    {
+      Header: "Days Left",
+      accessor: "numberofdays",
+      Cell: (row) => {
+        return <span>{row?.cell?.value ? row?.cell?.value : 'N/A'}</span>;
+      },
+    },
+
+    {
       Header: "Status",
       accessor: "status",
       Cell: (row) => {
@@ -119,12 +155,66 @@ const Dealer = () => {
         // return <span onClick={()=>{handleUpdate(row.row.original.id, row.cell.value)}} style={{cursor: 'pointer'}}>{row?.cell?.value == 1 ? "Active" : 'Inactive'}</span>;
       },
     },
+    {
+      Header: "action",
+      accessor: "action",
+      Cell: (row) => {
+        return (
+          <div className="flex space-x-3 rtl:space-x-reverse">
+           
+            <Tooltip content="Edit" placement="top" arrow animation="shift-away">
+              <button className="action-btn" type="button" onClick={async()=>{ setRow({membershipDate:row.row.original.membershipDate,numberofdays:row.row.original.numberofdays,id:row.row.original.id});setShowModal(true);}}>
+                <Icon icon="heroicons:pencil-square" />
+              </button>
+            </Tooltip>
+           
+           
+          </div>
+        );
+      },
+    },
 
 
   ];
   
   return (
     <div>
+         <Modal
+         activeModal={showModal}
+         onClose={()=>{setShowModal(false)}}
+            title="Edit Details"
+            label="Edit Details"
+            labelClass="btn-outline-dark"
+            // uncontrol
+            footerContent={
+              <Button
+                text="Update"
+                className="btn-dark "
+                onClick={() => {
+                  handleUpdate()
+                }}
+              />
+            }
+          >
+              <Textinput
+            label="Days Left"
+            id="Days Left"
+            type="text"
+            value ={row.numberofdays}
+            onChange={(e)=>handleInputChange(e.target.value,'numberofdays' )}
+            // inputName='numberofdays'
+            // placeholder="Management dashboard "
+          />
+          <p  className={`block capitalize  flex-0 mr-6 md:w-[200px] w-[200px] break-words mt-6`}>
+            Membership Date</p>
+           <Flatpickr
+              className="form-control py-2"
+              value={row.membershipDate}
+              onChange={(e)=>handleInputChange(e[0],'membershipDate' )}
+              id="default-picker"
+              // name='membershipDate'
+            />
+          </Modal>
       {/* <HomeBredCurbs title="Dealer's List" /> */}
       <div className="space-y-5">
       

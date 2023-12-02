@@ -5,7 +5,7 @@ import useDarkMode from "@/hooks/useDarkMode";
 import useSidebar from "@/hooks/useSidebar";
 import useSemiDark from "@/hooks/useSemiDark";
 import useSkin from "@/hooks/useSkin";
-
+import sariya from "@/assets/images/sariya/sariya.jpeg";
 // import images
 import MobileLogo from "@/assets/images/logo/logo-c.svg";
 import MobileLogoWhite from "@/assets/images/logo/logo-c-white.svg";
@@ -33,16 +33,16 @@ const SidebarLogo = ({ menuHover }) => {
         <div className="flex items-center space-x-4">
           <div className="logo-icon">
             {!isDark && !isSemiDark ? (
-              <img src={MobileLogo} alt="" />
+               <img src={isDark ? sariya : sariya} alt="" className="mb-10" style={{height:30, width:30, borderRadius:15,marginTop:35}}/>
             ) : (
-              <img src={MobileLogoWhite} alt="" />
+              <img src={isDark ? sariya : sariya} alt="" className="mb-10" style={{height:30, width:30, borderRadius:15,marginTop:35}}/>
             )}
           </div>
 
           {(!collapsed || menuHover) && (
             <div>
               <h1 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-                DashCode
+              Sariya Bazaar
               </h1>
             </div>
           )}
